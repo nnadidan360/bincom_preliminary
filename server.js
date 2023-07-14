@@ -2,7 +2,13 @@
 
 
 const express = require("express")
-const { Sequelize } = require('sequelize');
+
+const { Sequelize, Op, Model, DataTypes } = require("sequelize");
+
+
+const pollingRoutes = require("./routes/polling_route")
+const pollingResult = require("./routes/polling_results")
+
 
 
 
@@ -19,21 +25,23 @@ app.use(
   })
 )
 
+const sequelize = new Sequelize(
+    'bincom_test',
+    'root',
+    'ready007',
+     {
+       host: 'localhost',
+       dialect: 'mysql'
+     }
+   );
+   try {
+    sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
 
-// Option 2: Passing parameters separately (sqlite)
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: './data.sqlite'
 
-  
-});
-
-try {
-  sequelize.authenticate();
-  console.log('Connection has been established successfully.');
-} catch (error) {
-  console.error('Unable to connect to the database:', error);
-}
 
 app.use("/", pollingRoutes)
 app.use("/", pollingResult)
