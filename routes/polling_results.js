@@ -1,14 +1,13 @@
 const express = require("express")
 const router = express.Router()
-const db = require('../models')
+const { sequelize } = require('../models/agentname')
 
-router.get('/', (req, res) => {
-    return db.agentname.findAll()
-    .then((contacts) => res.send(contacts))
-    .catch((err) => {
-      console.log('There was an error querying contacts', JSON.stringify(err))
-      return res.send(err)
-    })
-})
+// router.get('/', (req, res) => {
+//     sequelize.sync().then(() => {
+//         console.log('Book table created successfully!');
+//      }).catch((error) => {
+//         console.error('Unable to create table : ', error);
+//      });
+// })
 
 module.exports = router

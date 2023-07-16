@@ -1,2 +1,2 @@
 
-const agent = require("db.agentname")
+const agent = require("../models")
