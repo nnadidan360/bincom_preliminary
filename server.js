@@ -69,11 +69,16 @@ app.use("/", pollingResult)
 //   });
 
 const Agent = db.AgentnameModel;
+const lga = db.lga;
+const party = db.party;
+const state = db.state;
+const ward = db.ward;
+
 
 app.get('/', async(req, res) => {
 //    const data = AgentnameModel.findAll()
 try {
-    const users = await Agent.findOne();
+    const users = await Agent.findAll();
     console.log(users)
 // console.log(users.every(user => user instanceof AgentnameModel)); // true
 // console.log("All users:", JSON.stringify(users, null, 2));    
